@@ -1,0 +1,357 @@
+unit uFornecedores;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.DBCtrls,
+  Vcl.Mask, Vcl.ComCtrls, Vcl.ToolWin, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ExtCtrls, Data.FMTBcd, Data.SqlExpr, System.Actions, Vcl.ActnList;
+
+type
+  TuFrmFornecedores = class(TForm)
+    tbFornecedores: TToolBar;
+    tbtnGravarCadastroFornecedor: TToolButton;
+    tbtnCancelarCadastroFornecedor: TToolButton;
+    tbtnSairCadastroFornecedor: TToolButton;
+    dbgFornecedor: TDBGrid;
+    tbtnCriarCadastroFornecedor: TToolButton;
+    tbtnListagemFornecedores: TToolButton;
+    tbtnExcluirCadastroFornecedor: TToolButton;
+    ImageList1: TImageList;
+    tbtnLocalizar: TToolButton;
+    gbDadosGeraisFornecedores: TGroupBox;
+    Label14: TLabel;
+    edtCodigoFornecedor: TDBEdit;
+    edtCnpjCpfFornecedor: TDBEdit;
+    edtNomeFantasiaFornecedor: TDBEdit;
+    Label17: TLabel;
+    Label18: TLabel;
+    edtRazaoFornecedor: TDBEdit;
+    edtContatoFornecedor: TDBEdit;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label16: TLabel;
+    cbPaisFornecedores: TComboBox;
+    gbEnderecoFornecedores: TGroupBox;
+    Label1: TLabel;
+    edtEnderecoFornecedor: TDBEdit;
+    Label2: TLabel;
+    edtNumeroFornecedor: TDBEdit;
+    edtComplementoFornecedor: TDBEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    edtBairroFornecedor: TDBEdit;
+    Label5: TLabel;
+    edtMunicipioFornecedor: TDBEdit;
+    Label6: TLabel;
+    cbEstadoFornecedor: TComboBox;
+    Label7: TLabel;
+    edtCepFornecedor: TDBEdit;
+    Label21: TLabel;
+    edtDDDFornecedor: TDBEdit;
+    Label22: TLabel;
+    edtTelefoneFornecedor: TDBEdit;
+    dsFornecedor: TDataSource;
+    QCodForn: TSQLQuery;
+    ActionFornec: TActionList;
+    StatusEdicaoFornec: TAction;
+    StatusNormalFornec: TAction;
+    lcbMunicipioFornecedor: TDBLookupComboBox;
+    tStatusBotoes: TTimer;
+    procedure tbtnGravarCadastroFornecedorClick(Sender: TObject);
+    procedure tbtnCriarCadastroFornecedorClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure tbtnListagemFornecedoresClick(Sender: TObject);
+    procedure tbtnExcluirCadastroFornecedorClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure tbtnCancelarCadastroFornecedorClick(Sender: TObject);
+    procedure tbtnLocalizarClick(Sender: TObject);
+    procedure edtCnpjCpfFornecedorKeyPress(Sender: TObject; var Key: Char);
+    procedure edtNomeFantasiaFornecedorChange(Sender: TObject);
+    procedure edtRazaoFornecedorChange(Sender: TObject);
+    procedure edtContatoFornecedorChange(Sender: TObject);
+    procedure edtCnpjCpfFornecedorChange(Sender: TObject);
+    procedure cbPaisFornecedoresChange(Sender: TObject);
+    procedure edtEnderecoFornecedorChange(Sender: TObject);
+    procedure edtNumeroFornecedorChange(Sender: TObject);
+    procedure edtComplementoFornecedorChange(Sender: TObject);
+    procedure edtBairroFornecedorChange(Sender: TObject);
+    procedure cbEstadoFornecedorChange(Sender: TObject);
+    procedure edtCepFornecedorChange(Sender: TObject);
+    procedure edtDDDFornecedorChange(Sender: TObject);
+    procedure edtTelefoneFornecedorChange(Sender: TObject);
+    procedure StatusEdicaoFornecExecute(Sender: TObject);
+    procedure StatusNormalFornecExecute(Sender: TObject);
+    procedure tbtnSairCadastroFornecedorClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure tStatusBotoesTimer(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uFrmFornecedores: TuFrmFornecedores;
+
+implementation
+
+{$R *.dfm}
+
+uses uDMBanco, uDMRelatorio, uLocalizarFornecedor, uCarregamentoDados,
+  uListForn, uTabMunicipios, uValidaCNPJCPF;
+
+
+procedure TuFrmFornecedores.StatusEdicaoFornecExecute(Sender: TObject);
+begin
+  tbtnCriarCadastroFornecedor.Enabled:= false;
+  tbtnGravarCadastroFornecedor.Enabled:= true;
+  tbtnCancelarCadastroFornecedor.Enabled:= true;
+  tbtnExcluirCadastroFornecedor.Enabled:= false;
+  tbtnLocalizar.Enabled:= false;
+  tbtnListagemFornecedores.Enabled:= false;
+end;
+
+procedure TuFrmFornecedores.StatusNormalFornecExecute(Sender: TObject);
+begin
+  tbtnCriarCadastroFornecedor.Enabled:= true;
+  tbtnGravarCadastroFornecedor.Enabled:= false;
+  tbtnCancelarCadastroFornecedor.Enabled:= false;
+  tbtnExcluirCadastroFornecedor.Enabled:= true;
+  tbtnLocalizar.Enabled:= true;
+  tbtnListagemFornecedores.Enabled:= true;
+end;
+
+procedure TuFrmFornecedores.cbEstadoFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.cbPaisFornecedoresChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtBairroFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtCepFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtCnpjCpfFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtCnpjCpfFornecedorKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  If not( key in['0'..'9',#08] )
+    Then key:=#0;
+end;
+
+procedure TuFrmFornecedores.edtComplementoFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtContatoFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtDDDFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtEnderecoFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtNomeFantasiaFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtNumeroFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtRazaoFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.edtTelefoneFornecedorChange(Sender: TObject);
+begin
+  StatusEdicaoFornec.Execute;
+  DMBanco.cdsFornecedor.Edit;
+end;
+
+procedure TuFrmFornecedores.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:= caFree;
+  uFrmFornecedores:= nil;
+end;
+
+procedure TuFrmFornecedores.FormCreate(Sender: TObject);
+begin
+  If (DMBanco.cdsFornecedor.IsEmpty)
+    Then begin
+      tbtnExcluirCadastroFornecedor.Enabled:= false;
+      tbtnListagemFornecedores.Enabled:= false;
+  end;
+
+end;
+
+procedure TuFrmFornecedores.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  If (Key = Vk_Escape)
+    Then tbtnSairCadastroFornecedor.Click;
+
+end;
+
+procedure TuFrmFornecedores.tbtnCancelarCadastroFornecedorClick(
+  Sender: TObject);
+begin
+  DMBanco.cdsFornecedor.CancelUpdates;
+  tbtnCancelarCadastroFornecedor.Enabled:= false;
+  tbtnGravarCadastroFornecedor.Enabled:= false;
+  tbtnCriarCadastroFornecedor.Enabled:= true;
+end;
+
+procedure TuFrmFornecedores.tbtnCriarCadastroFornecedorClick(Sender: TObject);
+begin
+   StatusEdicaoFornec.Execute;
+
+   {with DMBanco do
+    begin
+     sdsFornecedor.Close;
+     DMBanco.sdsFornecedor.CommandText := 'SELECT MAX(codigo)+1 AS COD FROM FORNECEDORES';
+     sdsFornecedor.Open;
+
+
+     cdsFornecedor.Insert;
+     edtCodigoFornecedor.Text := IntToStr(sdsFornecedor.FieldByName('COD').AsInteger);
+    end;}
+    DMBanco.cdsFornecedor.Insert;
+end;
+
+procedure TuFrmFornecedores.tbtnExcluirCadastroFornecedorClick(Sender: TObject);
+begin
+  if (MessageBox(handle, pWideChar('Deseja excluir o fornecedor '+dbgFornecedor.SelectedField.Text+'?'), 'Atenção', MB_ICONQUESTION + MB_YESNO) = mrYes)  then
+  begin
+    DMBanco.cdsFornecedor.Delete;
+    DMBanco.cdsFornecedor.ApplyUpdates(0);
+    dbgFornecedor.Refresh;
+    if (DMBanco.cdsFornecedor.IsEmpty) then
+    begin
+      tbtnExcluirCadastroFornecedor.Enabled:= false;
+      tbtnListagemFornecedores.Enabled:= false;
+    end;
+  end;
+end;
+
+procedure TuFrmFornecedores.tbtnGravarCadastroFornecedorClick(Sender: TObject);
+begin
+  if (DMBanco.cdsFornecedor.State in [dsInsert, dsEdit]) then
+  begin
+    QCodForn.Active:= false;
+    QCodForn.SQL.Clear;
+    QCodForn.SQL.Add('SELECT codigo FROM fornecedores WHERE codigo = '+dbgFornecedor.SelectedField.Text+'');
+    QCodForn.Active:= true;
+
+    if (dbgFornecedor.SelectedField.Text = '') then
+    begin
+      MessageBox(handle, pChar('O Código deve ser preenchido.' ), 'Atenção', MB_ICONEXCLAMATION +  MB_OK);;
+      dbgFornecedor.SetFocus;
+    end
+    else if not QCodForn.IsEmpty then
+    begin
+      MessageBox(handle, pChar('Esse código já está sendo utilizado.' ), 'Atenção', MB_ICONERROR +  MB_OK);
+      dbgFornecedor.SetFocus;
+    end
+    else if (edtRazaoFornecedor.Text = '') then
+    begin
+      MessageBox(handle, pChar('A Razão Social deve ser preenchida.' ), 'Atenção', MB_ICONEXCLAMATION +  MB_OK);
+      edtRazaoFornecedor.SetFocus;
+    end
+    else if (edtNomeFantasiaFornecedor.Text = '') then
+    begin
+      MessageBox(handle, pChar('O Nome Fantasia deve ser preenchido.' ), 'Atenção', MB_ICONEXCLAMATION +  MB_OK);
+      edtNomeFantasiaFornecedor.SetFocus;
+    end
+    else if (edtCnpjCpfFornecedor.Text = '') then
+    begin
+      MessageBox(handle, pChar('O CNPJ/CPF deve ser preenchido.' ), 'Atenção', MB_ICONEXCLAMATION +  MB_OK);
+      edtCnpjCpfFornecedor.SetFocus;
+    end
+    else if (isCNPJ(edtCnpjCpfFornecedor.Text)) then
+    begin
+      DMBanco.cdsFornecedor.Post;
+      DMBanco.cdsFornecedor.ApplyUpdates(0);
+      dbgFornecedor.Refresh;
+      StatusNormalFornec.Execute;
+    end;
+  end;
+end;
+
+procedure TuFrmFornecedores.tbtnListagemFornecedoresClick(Sender: TObject);
+var
+x: integer;
+begin
+  uFrmListForn:= TuFrmListForn.Create(Application);
+  uFrmListForn.ShowModal;
+end;
+
+procedure TuFrmFornecedores.tbtnLocalizarClick(Sender: TObject);
+begin
+  uFrmLocalizarFornecedor:= TuFrmLocalizarFornecedor.Create(Application);
+  uFrmLocalizarFornecedor.ShowModal;
+end;
+
+procedure TuFrmFornecedores.tbtnSairCadastroFornecedorClick(Sender: TObject);
+begin
+  If (DMBanco.cdsFornecedor.State in [dsInsert, dsEdit])
+    Then begin
+      If MessageBox(handle, pChar('As alterações ainda não foram salvas. Deseja salvá-las ?' ), 'Atenção', MB_ICONQUESTION +  MB_YESNO) = mrYes
+        Then tbtnGravarCadastroFornecedor.Click;
+    end
+    Else begin
+      DMBanco.cdsFornecedor.CancelUpdates;
+      Close;
+      StatusNormalFornec.Execute;
+    end;
+end;
+
+procedure TuFrmFornecedores.tStatusBotoesTimer(Sender: TObject);
+begin
+  If DMBanco.cdsFornecedor.State in [dsInsert, dsEdit]
+    Then StatusNormalFornec.Execute
+  Else StatusEdicaoFornec.Execute;
+
+end;
+
+end.

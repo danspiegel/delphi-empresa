@@ -1,0 +1,95 @@
+unit uTabMunicipios;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB, Data.FMTBcd, Data.SqlExpr;
+
+type
+  TuFrmTabMunicipios = class(TForm)
+    ToolBar1: TToolBar;
+    tbtnAtualizarTabMunicipios: TToolButton;
+    tbtnSairTabMunicipios: TToolButton;
+    rbgOrderTabMunicipios: TRadioGroup;
+    rbOrderCodigoTabMunicipios: TRadioButton;
+    rbOrderNomeTabMunicipios: TRadioButton;
+    dbgMunicipios: TDBGrid;
+    dsMunicipios: TDataSource;
+    edtLocalizarTabMunicipios: TEdit;
+    btnLocalizarTabMunicipios: TButton;
+    btnAnteriorTabMunicipios: TButton;
+    btnProximoTabMunicipios: TButton;
+    rbOrderUFTabMunicipios: TRadioButton;
+    QLocMunic: TSQLQuery;
+    procedure tbtnSairTabMunicipiosClick(Sender: TObject);
+    procedure tbtnAtualizarTabMunicipiosClick(Sender: TObject);
+    procedure btnLocalizarTabMunicipiosClick(Sender: TObject);
+    procedure btnProximoTabMunicipiosClick(Sender: TObject);
+    procedure btnAnteriorTabMunicipiosClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uFrmTabMunicipios: TuFrmTabMunicipios;
+
+implementation
+
+{$R *.dfm}
+
+uses uDMBanco, uFornecedores;
+
+procedure TuFrmTabMunicipios.btnAnteriorTabMunicipiosClick(Sender: TObject);
+begin
+  QLocMunic.Prior;
+  btnProximoTabMunicipios.Enabled:= true;
+
+  if QLocMunic.Bof then
+    btnAnteriorTabMunicipios.Enabled:= false;
+end;
+
+procedure TuFrmTabMunicipios.btnLocalizarTabMunicipiosClick(Sender: TObject);
+begin
+  if (edtLocalizarTabMunicipios.Text = '') then
+    MessageDlg('O texto para busca deve ser informado.', mtWarning, [mbOK], 0)
+  else
+  begin
+    with QLocMunic do
+    begin
+      Close;
+      SQL.Add('SELECT nomemunicipio FROM municipios WHERE nomemunicipio LIKE "'+edtLocalizarTabMunicipios.Text+'%" OR nomemunicipio LIKE "%'+edtLocalizarTabMunicipios.Text+'%" OR nomemunicipio LIKE "%'+edtLocalizarTabMunicipios.Text+'"');
+      Open;
+    end;
+    //if DMBanco.cdsMunicipios.Locate('nomemunicipio', edtLocalizarTabMunicipios.Text, [loCaseInsensitive,loPartialKey]) then
+    if not QLocMunic.IsEmpty then
+      btnProximoTabMunicipios.Enabled:= true
+    else
+      MessageDlg('Nenhum registro encontrado.', mtWarning, [mbOK], 0);
+  end;
+end;
+
+procedure TuFrmTabMunicipios.btnProximoTabMunicipiosClick(Sender: TObject);
+begin
+  QLocMunic.Next;
+  btnAnteriorTabMunicipios.Enabled:= true;
+
+  if QLocMunic.Eof then
+    btnProximoTabMunicipios.Enabled:= false;
+end;
+
+procedure TuFrmTabMunicipios.tbtnAtualizarTabMunicipiosClick(Sender: TObject);
+begin
+  DMBanco.cdsMunicipios.Refresh;
+  MessageDlg('A tabela já está atualizada.', mtInformation, [mbOK], 0);
+end;
+
+procedure TuFrmTabMunicipios.tbtnSairTabMunicipiosClick(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

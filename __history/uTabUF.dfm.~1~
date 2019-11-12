@@ -1,0 +1,110 @@
+object uFrmTabUF: TuFrmTabUF
+  Left = 0
+  Top = 0
+  Caption = 'Tabela de Estados'
+  ClientHeight = 402
+  ClientWidth = 498
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ToolBar1: TToolBar
+    Left = 0
+    Top = 0
+    Width = 498
+    Height = 29
+    ButtonHeight = 21
+    ButtonWidth = 25
+    Caption = 'tbUF'
+    ParentShowHint = False
+    ShowCaptions = True
+    ShowHint = True
+    TabOrder = 0
+    object tbtnSairUF: TToolButton
+      Left = 0
+      Top = 0
+      Caption = 'Sair'
+      ImageIndex = 0
+    end
+  end
+  object rgOrdemUF: TRadioGroup
+    Left = 8
+    Top = 77
+    Width = 482
+    Height = 52
+    Caption = 'Ordenar Por'
+    TabOrder = 1
+  end
+  object edtLocalizarUF: TEdit
+    Left = 8
+    Top = 48
+    Width = 177
+    Height = 21
+    TabOrder = 2
+    TextHint = 'Nome'
+  end
+  object btnLocalizarUF: TButton
+    Left = 191
+    Top = 46
+    Width = 75
+    Height = 25
+    Caption = 'Localizar'
+    TabOrder = 3
+  end
+  object btnProxLocalUF: TButton
+    Left = 353
+    Top = 46
+    Width = 75
+    Height = 25
+    Caption = 'Pr'#243'ximo'
+    Enabled = False
+    TabOrder = 4
+  end
+  object btnAntLocalUF: TButton
+    Left = 272
+    Top = 46
+    Width = 75
+    Height = 25
+    Caption = 'Anterior'
+    Enabled = False
+    TabOrder = 5
+  end
+  object rbCodUF: TRadioButton
+    Left = 32
+    Top = 96
+    Width = 57
+    Height = 17
+    Caption = 'C'#243'digo'
+    TabOrder = 6
+  end
+  object rbNomeUF: TRadioButton
+    Left = 272
+    Top = 96
+    Width = 49
+    Height = 17
+    Caption = 'Nome'
+    TabOrder = 7
+  end
+  object dbgUFs: TDBGrid
+    Left = 1
+    Top = 135
+    Width = 497
+    Height = 266
+    TabOrder = 8
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object dsEstados: TDataSource
+    DataSet = DMBanco.cdsEstados
+    Left = 448
+    Top = 32
+  end
+end

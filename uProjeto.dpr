@@ -1,0 +1,37 @@
+program uProjeto;
+
+uses
+  Vcl.Forms,
+  uCadPart in 'uCadPart.pas' {uFrmCadPart},
+  uDMBanco in 'uDMBanco.pas' {DMBanco: TDataModule},
+  uPrincipal in 'uPrincipal.pas' {uFrmPrincipal},
+  uDMRelPart in 'uDMRelPart.pas' {DMRelPart: TDataModule},
+  uLogin in 'uLogin.pas' {uFrmTelaLogin},
+  uUsuarios in 'uUsuarios.pas' {uFrmUsuarios},
+  uCadastroSenha in 'uCadastroSenha.pas' {uFrmCadastroSenha},
+  uLocPart in 'uLocPart.pas' {uFrmLocPart},
+  uCarregamentoDados in 'uCarregamentoDados.pas' {uFrmCarregamentoDados},
+  uListPart in 'uListPart.pas' {uFrmListPart},
+  uTabMunicipios in 'uTabMunicipios.pas' {uFrmTabMunicipios},
+  uCfgEnvEmail in 'uCfgEnvEmail.pas' {uFrmCfgEnvEmail},
+  uDMPessoas in 'uDMPessoas.pas' {DMPessoas: TDataModule},
+  uFuncoes in 'uFuncoes.pas',
+  uDMCfgEnvEmail in 'uDMCfgEnvEmail.pas' {DMCfgEnvEmail: TDataModule},
+  uDMUsuarios in 'uDMUsuarios.pas' {DMUsuarios: TDataModule},
+  uDMMunicipios in 'uDMMunicipios.pas' {DMMunicipios: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TDMBanco, DMBanco);
+  Application.CreateForm(TDMPessoas, DMPessoas);
+  Application.CreateForm(TDMRelPart, DMRelPart);
+  Application.CreateForm(TDMCfgEnvEmail, DMCfgEnvEmail);
+  Application.CreateForm(TDMUsuarios, DMUsuarios);
+  Application.CreateForm(TDMMunicipios, DMMunicipios);
+  Application.CreateForm(TuFrmPrincipal, uFrmPrincipal);
+  Application.CreateForm(TuFrmTelaLogin, uFrmTelaLogin);
+  Application.Run;
+end.

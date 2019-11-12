@@ -1,0 +1,96 @@
+unit uLogin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Data.DB, Data.FMTBcd, Data.SqlExpr;
+
+type
+  TuFrmTelaLogin = class(TForm)
+    dsUsuario: TDataSource;
+    edtUsuario: TEdit;
+    edtSenha: TEdit;
+    QLoginSistema: TSQLQuery;
+    btnConfirmarLogin: TButton;
+    btnCancelarLogin: TButton;
+    procedure btnConfirmarLoginClick(Sender: TObject);
+    procedure btnCancelarLoginClick(Sender: TObject);
+    procedure edtSenhaKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uFrmTelaLogin: TuFrmTelaLogin;
+
+implementation
+
+{$R *.dfm}
+
+uses uDMBanco, uPrincipal, uCarregamentoDados;
+
+procedure TuFrmTelaLogin.btnCancelarLoginClick(Sender: TObject);
+begin
+  FreeAndNil(uFrmTelaLogin);
+end;
+
+procedure TuFrmTelaLogin.btnConfirmarLoginClick(Sender: TObject);
+begin
+  If ((edtUsuario.Text = '') and (edtSenha.Text = ''))
+  Then Begin
+          MessageDlg('Os campos de usuário e senha devem ser preenchidos!', mtInformation, [mbOK],0);
+          edtUsuario.SetFocus;
+       End
+  Else If (edtUsuario.Text = '')
+  Then Begin
+          MessageDlg('O campo usuário deve ser preenchido!', mtInformation, [mbOK],0);
+          edtUsuario.SetFocus;
+       End
+  Else If (edtSenha.Text = '')
+  Then Begin
+          MessageDlg('O campo senha deve ser preenchido!', mtInformation, [mbOK],0);
+          edtSenha.SetFocus;
+       End
+  Else Begin
+        Try
+          QLoginSistema.Close;
+          QLoginSistema.SQL.Clear;
+          QLoginSistema.SQL.Add('SELECT idusuario, senha FROM public.usuario WHERE idusuario = "'+edtUsuario.Text+'" and senha = "'+edtSenha.Text+'";');
+          QLoginSistema.Open;
+
+        If Not QLoginSistema.IsEmpty
+        Then Begin
+              uFrmPrincipal.StatusMenuSistHab.Execute;
+              uFrmPrincipal.stbStatus.Panels[0].Text := 'Usuário: '+edtUsuario.Text;
+              FreeAndNil(uFrmTelaLogin);
+            End
+        Else Begin
+              MessageDlg('Usuário e/ou senha inválido!', mtWarning, [mbOK], 0);
+              edtSenha.Text:= '';
+              edtSenha.SetFocus;
+            End;
+        Except
+          On e: exception
+          Do  MessageDlg(E.Message, mtWarning, [mbOK], 0);
+        End;
+  End;
+end;
+
+procedure TuFrmTelaLogin.edtSenhaKeyPress(Sender: TObject; var Key: Char);
+begin
+  If Not( key in['0'..'9',#08] )
+    Then key:=#0;
+end;
+
+procedure TuFrmTelaLogin.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:= caFree;
+  uFrmTelaLogin:= nil;
+end;
+
+end.

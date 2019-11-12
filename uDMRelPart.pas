@@ -1,0 +1,30 @@
+unit uDMRelPart;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, frxClass, frxDBSet;
+
+type
+  TDMRelPart = class(TDataModule)
+    frpParticipante: TfrxReport;
+    dbdParticipante: TfrxDBDataset;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DMRelPart: TDMRelPart;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses uListPart, uDMBanco;
+
+
+{$R *.dfm}
+
+end.

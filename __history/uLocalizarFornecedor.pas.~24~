@@ -1,0 +1,181 @@
+unit uLocalizarFornecedor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.ToolWin, Xml.xmldom, Data.DB, Xmlxform, Data.FMTBcd,
+  Data.SqlExpr;
+
+type
+  TuFrmLocalizarFornecedor = class(TForm)
+    edtCampoLocalizar: TEdit;
+    ToolBar1: TToolBar;
+    tbtnBuscarFornecedor: TToolButton;
+    tbtnSair: TToolButton;
+    rgBuscarFornecedor: TRadioGroup;
+    rbCodigoFornecedor: TRadioButton;
+    rbRazaoFornecedor: TRadioButton;
+    rbCnpjCpfFornecedor: TRadioButton;
+    rbTelefoneFornecedor: TRadioButton;
+    tbtnProximoLocalizarFornecedor: TToolButton;
+    tbtnAnteriorLocalizarFornecedor: TToolButton;
+    cbResultadoExatoFornecedor: TCheckBox;
+    stbLocalizarFornecedor: TStatusBar;
+    dsLocalizarFornecedor: TDataSource;
+    QLocalizaForn: TSQLQuery;
+    procedure tbtnSairClick(Sender: TObject);
+    procedure tbtnBuscarFornecedorClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure tbtnProximoLocalizarFornecedorClick(Sender: TObject);
+    procedure tbtnAnteriorLocalizarFornecedorClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uFrmLocalizarFornecedor: TuFrmLocalizarFornecedor;
+
+implementation
+
+{$R *.dfm}
+
+uses uDMBanco, uFornecedores;
+
+procedure TuFrmLocalizarFornecedor.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_Escape) then
+  begin
+    FreeAndNil(uFrmLocalizarFornecedor);
+  end;
+end;
+
+procedure TuFrmLocalizarFornecedor.tbtnAnteriorLocalizarFornecedorClick(
+  Sender: TObject);
+begin
+  DMBanco.cdsFornecedor.FindPrior;
+  tbtnProximoLocalizarFornecedor.Enabled:= true;
+
+  if (DMBanco.cdsFornecedor.FindFirst) then
+  begin
+    tbtnAnteriorLocalizarFornecedor.Enabled:= false;
+  end;
+end;
+
+procedure TuFrmLocalizarFornecedor.tbtnBuscarFornecedorClick(Sender: TObject);
+begin
+  if (edtCampoLocalizar.Text = '') then
+    MessageDlg('O texto para busca deve ser informado.', mtError, [mbOK], 0)
+  else if cbResultadoExatoFornecedor.Checked then
+  begin
+    if rbCodigoFornecedor.Checked then
+    begin
+      QLocalizaForn.Close;
+      QLocalizaForn.SQL.Clear;
+      QLocalizaForn.SQL.Add('SELECT codigo FROM fornecedores WHERE codigo = "'+edtCampoLocalizar.Text+'"');
+      QLocalizaForn.Open;
+      DMBanco.cdsFornecedor.IndexFieldNames:= 'codigo';
+      if (DMBanco.cdsFornecedor.FindKey([edtCampoLocalizar.Text])) then
+      begin
+        tbtnProximoLocalizarFornecedor.Enabled:= true;
+        stbLocalizarFornecedor.Panels[0].Text:= 'Fornecedor: ' + uFrmFornecedores.edtNomeFantasiaFornecedor.Text;
+      end
+      else
+        stbLocalizarFornecedor.Panels[0].Text:= 'NENHUM REGISTRO ENCONTRADO';
+    end
+    else if rbRazaoFornecedor.Checked then
+    begin
+      DMBanco.cdsFornecedor.IndexFieldNames:= 'razao';
+      if (DMBanco.cdsFornecedor.FindKey([edtCampoLocalizar.Text])) then
+      begin
+        tbtnProximoLocalizarFornecedor.Enabled:= true;
+        stbLocalizarFornecedor.Panels[0].Text:= 'Fornecedor: ' + uFrmFornecedores.edtNomeFantasiaFornecedor.Text;
+      end
+      else
+        stbLocalizarFornecedor.Panels[0].Text:= 'NENHUM REGISTRO ENCONTRADO';
+    end
+    else if rbCnpjCpfFornecedor.Checked then
+    begin
+      DMBanco.cdsFornecedor.IndexFieldNames:= 'numerocnpjcpf';
+      if (DMBanco.cdsFornecedor.FindKey([edtCampoLocalizar.Text])) then
+      begin
+        tbtnProximoLocalizarFornecedor.Enabled:= true;
+        stbLocalizarFornecedor.Panels[0].Text:= 'Fornecedor: ' + uFrmFornecedores.edtNomeFantasiaFornecedor.Text;
+      end
+      else
+        stbLocalizarFornecedor.Panels[0].Text:= 'NENHUM REGISTRO ENCONTRADO';
+    end
+    else if rbTelefoneFornecedor.Checked then
+    begin
+      DMBanco.cdsFornecedor.IndexFieldNames:= 'telefone';
+      if (DMBanco.cdsFornecedor.FindKey([edtCampoLocalizar.Text])) then
+      begin
+        tbtnProximoLocalizarFornecedor.Enabled:= true;
+        stbLocalizarFornecedor.Panels[0].Text:= 'Fornecedor: ' + uFrmFornecedores.edtNomeFantasiaFornecedor.Text;
+      end
+      else
+        stbLocalizarFornecedor.Panels[0].Text:= 'NENHUM REGISTRO ENCONTRADO';
+    end;
+  end
+  else if not cbResultadoExatoFornecedor.Checked then
+  begin
+    if rbCodigoFornecedor.Checked then
+    begin
+      if (DMBanco.cdsFornecedor.Locate('codigo', edtCampoLocalizar.Text,[loCaseInsensitive,loPartialKey])) then
+      begin
+        tbtnProximoLocalizarFornecedor.Enabled:= true;
+        stbLocalizarFornecedor.Panels[0].Text:= 'Fornecedor: ' + uFrmFornecedores.edtNomeFantasiaFornecedor.Text;
+      end;
+    end
+    else if rbRazaoFornecedor.Checked then
+    begin
+      if (DMBanco.cdsFornecedor.Locate('razao', edtCampoLocalizar.Text,[loCaseInsensitive,loPartialKey])) then
+      begin
+        tbtnProximoLocalizarFornecedor.Enabled:= true;
+        stbLocalizarFornecedor.Panels[0].Text:= 'Fornecedor: ' + uFrmFornecedores.edtNomeFantasiaFornecedor.Text;
+      end;
+    end
+    else if rbCnpjCpfFornecedor.Checked then
+    begin
+      if (DMBanco.cdsFornecedor.Locate('numerocnpjcpf', edtCampoLocalizar.Text,[loCaseInsensitive,loPartialKey])) then
+      begin
+        tbtnProximoLocalizarFornecedor.Enabled:= true;
+        stbLocalizarFornecedor.Panels[0].Text:= 'Fornecedor: ' + uFrmFornecedores.edtNomeFantasiaFornecedor.Text;
+      end;
+    end
+    else if rbTelefoneFornecedor.Checked then
+    begin
+      if (DMBanco.cdsFornecedor.Locate('telefone', edtCampoLocalizar.Text,[loCaseInsensitive,loPartialKey])) then
+      begin
+        tbtnProximoLocalizarFornecedor.Enabled:= true;
+        stbLocalizarFornecedor.Panels[0].Text:= 'Fornecedor: ' + uFrmFornecedores.edtNomeFantasiaFornecedor.Text;
+      end;
+    end;
+  end;
+end;
+
+procedure TuFrmLocalizarFornecedor.tbtnProximoLocalizarFornecedorClick(
+  Sender: TObject);
+begin
+  if (DMBanco.cdsFornecedor.FindKey([edtCampoLocalizar.Text])) then
+  begin
+    DMBanco.cdsFornecedor.FindNext;
+    tbtnAnteriorLocalizarFornecedor.Enabled:= true;
+  end;
+
+  if (DMBanco.cdsFornecedor.FindLast) then
+  begin
+    tbtnProximoLocalizarFornecedor.Enabled:= false;
+  end;
+end;
+
+procedure TuFrmLocalizarFornecedor.tbtnSairClick(Sender: TObject);
+begin
+  FreeAndNil(uFrmLocalizarFornecedor);
+end;
+
+end.

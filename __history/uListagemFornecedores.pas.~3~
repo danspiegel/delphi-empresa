@@ -1,0 +1,35 @@
+unit uListagemFornecedores;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin;
+
+type
+  TuFrmListagemFornecedores = class(TForm)
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ImageList1: TImageList;
+    procedure ToolButton3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uFrmListagemFornecedores: TuFrmListagemFornecedores;
+
+implementation
+
+{$R *.dfm}
+
+procedure TuFrmListagemFornecedores.ToolButton3Click(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

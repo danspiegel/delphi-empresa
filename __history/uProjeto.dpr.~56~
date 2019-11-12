@@ -1,0 +1,30 @@
+program uProjeto;
+
+uses
+  Vcl.Forms,
+  uCadPart in 'uCadPart.pas' {uFrmCadPart},
+  uDMBanco in 'uDMBanco.pas' {DMBanco: TDataModule},
+  uPrincipal in 'uPrincipal.pas' {uFrmPrincipal},
+  uDMRelPart in 'uDMRelPart.pas' {DMRelPart: TDataModule},
+  uLogin in 'uLogin.pas' {uFrmTelaLogin},
+  uUsuarios in 'uUsuarios.pas' {uFrmUsuarios},
+  uCadastroSenha in 'uCadastroSenha.pas' {uFrmCadastroSenha},
+  uLocPart in 'uLocPart.pas' {uFrmLocPart},
+  uCarregamentoDados in 'uCarregamentoDados.pas' {uFrmCarregamentoDados},
+  uListPart in 'uListPart.pas' {uFrmListPart},
+  uTabMunicipios in 'uTabMunicipios.pas' {uFrmTabMunicipios},
+  uCfgEnvEmail in 'uCfgEnvEmail.pas' {uFrmCfgEnvEmail},
+  uValidaCNPJCPF in 'uValidaCNPJCPF.pas',
+  uDMPessoas in 'uDMPessoas.pas' {uFrmDMPessoas: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TDMBanco, DMBanco);
+  Application.CreateForm(TuFrmCadPart, uFrmCadPart);
+  Application.CreateForm(TuFrmDMPessoas, uFrmDMPessoas);
+  Application.CreateForm(TDMRelPart, DMRelPart);
+  Application.Run;
+end.

@@ -1,0 +1,40 @@
+unit uDMBanco;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DBXMySQL, Data.DB, Data.SqlExpr,
+  Data.FMTBcd, Datasnap.DBClient, Datasnap.Provider, DBXDevartPostgreSQL,
+  Data.DBXOdbc;
+
+type
+  TDMBanco = class(TDataModule)
+    ConnBanco: TSQLConnection;
+    cdsUsuario: TClientDataSet;
+    sdsUsuario: TSQLDataSet;
+    dspUsuario: TDataSetProvider;
+    cdsUsuarioidusuario: TStringField;
+    cdsUsuariosenha: TStringField;
+    cdsUsuarionomeusuario: TStringField;
+    sdsFornecedor: TSQLDataSet;
+    cdsFornecedor: TClientDataSet;
+    dspFornecedor: TDataSetProvider;
+    sdsMunicipios: TSQLDataSet;
+    cdsMunicipios: TClientDataSet;
+    dspMunicipios: TDataSetProvider;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DMBanco: TDMBanco;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

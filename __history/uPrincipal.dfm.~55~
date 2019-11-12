@@ -1,0 +1,146 @@
+object uFrmPrincipal: TuFrmPrincipal
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'Principal'
+  ClientHeight = 370
+  ClientWidth = 551
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -15
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 18
+  object stbStatus: TStatusBar
+    Left = 0
+    Top = 344
+    Width = 551
+    Height = 26
+    Panels = <
+      item
+        Width = 150
+      end
+      item
+        Width = 150
+      end
+      item
+        Width = 150
+      end>
+  end
+  object MainMenu1: TMainMenu
+    Left = 24
+    Top = 48
+    object Sistema1: TMenuItem
+      Caption = '&Sistema'
+      object Login1: TMenuItem
+        Caption = 'L&ogin'
+        OnClick = Login1Click
+      end
+      object Logout1: TMenuItem
+        Caption = '&Logout'
+        Enabled = False
+        OnClick = Logout1Click
+      end
+      object Usuarios1: TMenuItem
+        Caption = '&Usu'#225'rios'
+        object UsuariosManutencao1: TMenuItem
+          Caption = '&Manuten'#231#227'o'
+          Enabled = False
+          OnClick = UsuariosManutencao1Click
+        end
+        object AlterarSenha1: TMenuItem
+          Caption = 'Alterar &Senha'
+          Enabled = False
+          OnClick = AlterarSenha1Click
+        end
+      end
+      object Sair1: TMenuItem
+        Caption = '&Sair'
+        OnClick = Sair1Click
+      end
+    end
+    object Cadastro1: TMenuItem
+      Caption = '&Cadastro'
+      object Fornecedores1: TMenuItem
+        Caption = '&Fornecedores'
+        object ManutFornec1: TMenuItem
+          Caption = '&Manuten'#231#227'o'
+          Enabled = False
+          OnClick = ManutFornec1Click
+        end
+      end
+      object TabelasOficiais1: TMenuItem
+        Caption = 'Tabelas &Oficiais'
+        object TabelaMunicipios1: TMenuItem
+          Caption = 'Tabela de &Munic'#237'pios'
+          Enabled = False
+          OnClick = TabelaMunicipios1Click
+        end
+        object TabeladeEstados1: TMenuItem
+          Caption = 'Tabela de Estados'
+          Enabled = False
+          OnClick = TabeladeEstados1Click
+        end
+      end
+    end
+    object Extras1: TMenuItem
+      Caption = '&Janelas'
+      object LadoaLado1: TMenuItem
+        Caption = '&Lado a Lado'
+        object Vertical1: TMenuItem
+          Caption = '&Vertical'
+          Enabled = False
+          OnClick = Vertical1Click
+        end
+        object Horizontal1: TMenuItem
+          Caption = '&Horizontal'
+          Enabled = False
+          OnClick = Horizontal1Click
+        end
+      end
+      object Cascatear1: TMenuItem
+        Caption = '&Cascatear'
+        Enabled = False
+        OnClick = Cascatear1Click
+      end
+      object FecharTodos1: TMenuItem
+        Caption = 'Fechar &Todos'
+        Enabled = False
+        OnClick = FecharTodos1Click
+      end
+    end
+    object Ajuda1: TMenuItem
+      Caption = '&Ajuda'
+      object Sobre1: TMenuItem
+        Caption = '&Sobre'
+        Enabled = False
+        OnClick = Sobre1Click
+      end
+    end
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 96
+    Top = 48
+  end
+  object ActionMenuSistema: TActionList
+    Left = 184
+    Top = 48
+    object StatusMenuSistDesab: TAction
+      Caption = 'StatusMenuSistDesab'
+      OnExecute = StatusMenuSistDesabExecute
+    end
+    object StatusMenuSistHab: TAction
+      Caption = 'StatusMenuSistHab'
+      OnExecute = StatusMenuSistHabExecute
+    end
+  end
+end

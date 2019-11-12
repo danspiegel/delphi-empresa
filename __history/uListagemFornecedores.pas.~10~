@@ -1,0 +1,72 @@
+unit uListagemFornecedores;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin;
+
+type
+  TuFrmListagemFornecedores = class(TForm)
+    ToolBar1: TToolBar;
+    tbtnImprimirListagemFornecedores: TToolButton;
+    tbtnVisualizarListagemFornecedores: TToolButton;
+    ToolButton3: TToolButton;
+    ImageList1: TImageList;
+    dlgImprimir: TPrintDialog;
+    procedure ToolButton3Click(Sender: TObject);
+    procedure tbtnImprimirListagemFornecedoresClick(Sender: TObject);
+    procedure tbtnVisualizarListagemFornecedoresClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uFrmListagemFornecedores: TuFrmListagemFornecedores;
+
+implementation
+
+{$R *.dfm}
+
+uses uDMBanco, uDMRelatorio;
+
+procedure TuFrmListagemFornecedores.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_Escape) then
+    Close;
+end;
+
+procedure TuFrmListagemFornecedores.tbtnImprimirListagemFornecedoresClick(Sender: TObject);
+begin
+  if (DMBanco.cdsFornecedor.IsEmpty) then
+    MessageDlg('Não existem dados a serem impressos.', mtWarning, [mbOK], 0)
+  else
+  begin
+    if (dlgImprimir.Execute) then
+      DMRelatorio.frpFornecedor.LoadFromFile('C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Relatorio\ListagemFornecedores.fr3');
+      DMRelatorio.frpFornecedor.PrepareReport(true);
+  end;
+
+end;
+
+procedure TuFrmListagemFornecedores.tbtnVisualizarListagemFornecedoresClick(Sender: TObject);
+begin
+  if (DMBanco.cdsFornecedor.IsEmpty) then
+    MessageDlg('Não existem dados a serem visualizados.', mtWarning, [mbOK], 0)
+  else
+  begin
+    DMRelatorio.frpFornecedor.LoadFromFile('C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Relatorio\ListagemFornecedores.fr3');
+    DMRelatorio.frpFornecedor.ShowReport;
+  end;
+end;
+
+procedure TuFrmListagemFornecedores.ToolButton3Click(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

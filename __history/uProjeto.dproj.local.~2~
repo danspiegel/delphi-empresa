@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014/10/05 15:21:14.000.681,=C:\Users\daniel\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/10/05 15:22:14.000.038,=C:\Users\daniel\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/10/05 15:23:01.000.382,C:\Users\daniel\Documents\RAD Studio\Projects\Unit2.pas=C:\Users\daniel\Desktop\CadastroMySQL\uDMBanco.pas</Transaction>
+    <Transaction>2014/10/05 15:23:01.000.382,C:\Users\daniel\Documents\RAD Studio\Projects\Unit2.dfm=C:\Users\daniel\Desktop\CadastroMySQL\uDMBanco.dfm</Transaction>
+    <Transaction>2014/10/05 15:23:07.000.646,C:\Users\daniel\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\daniel\Desktop\CadastroMySQL\uPrincipal.pas</Transaction>
+    <Transaction>2014/10/05 15:23:07.000.646,C:\Users\daniel\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\daniel\Desktop\CadastroMySQL\uPrincipal.dfm</Transaction>
+    <Transaction>2014/10/05 15:23:13.000.190,C:\Users\daniel\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\daniel\Desktop\CadastroMySQL\uProjeto.dproj</Transaction>
+    <Transaction>2014/10/05 16:33:15.000.826,=C:\Users\daniel\Desktop\CadastroMySQL\Unit1.pas</Transaction>
+    <Transaction>2014/10/05 16:34:21.000.006,C:\Users\daniel\Desktop\CadastroMySQL\uCadastroFornecedor.dfm=C:\Users\daniel\Desktop\CadastroMySQL\uPrincipal.dfm</Transaction>
+    <Transaction>2014/10/05 16:34:21.000.006,C:\Users\daniel\Desktop\CadastroMySQL\uCadastroFornecedor.pas=C:\Users\daniel\Desktop\CadastroMySQL\uPrincipal.pas</Transaction>
+    <Transaction>2014/10/05 16:34:29.000.523,C:\Users\daniel\Desktop\CadastroMySQL\uPrincipal.pas=C:\Users\daniel\Desktop\CadastroMySQL\Unit1.pas</Transaction>
+    <Transaction>2014/10/05 16:34:29.000.523,C:\Users\daniel\Desktop\CadastroMySQL\uPrincipal.dfm=C:\Users\daniel\Desktop\CadastroMySQL\Unit1.dfm</Transaction>
+    <Transaction>2014/10/05 16:41:15.000.154,=C:\Users\daniel\Desktop\CadastroMySQL\Unit1.pas</Transaction>
+    <Transaction>2014/10/05 16:44:30.000.181,C:\Users\daniel\Desktop\CadastroMySQL\uFornecedores.dfm=C:\Users\daniel\Desktop\CadastroMySQL\uCadastroFornecedor.dfm</Transaction>
+    <Transaction>2014/10/05 16:44:30.000.181,C:\Users\daniel\Desktop\CadastroMySQL\uFornecedores.pas=C:\Users\daniel\Desktop\CadastroMySQL\uCadastroFornecedor.pas</Transaction>
+    <Transaction>2014/10/05 20:10:16.000.458,=C:\Users\daniel\Desktop\CadastroMySQL\Unit1.pas</Transaction>
+    <Transaction>2014/10/05 20:15:40.000.602,C:\Users\daniel\Desktop\CadastroMySQL\uListagemFornecedores.dfm=C:\Users\daniel\Desktop\CadastroMySQL\Unit1.dfm</Transaction>
+    <Transaction>2014/10/05 20:15:40.000.602,C:\Users\daniel\Desktop\CadastroMySQL\uListagemFornecedores.pas=C:\Users\daniel\Desktop\CadastroMySQL\Unit1.pas</Transaction>
+    <Transaction>2014/10/05 21:01:52.000.725,=C:\Users\daniel\Desktop\CadastroMySQL\Unit1.pas</Transaction>
+    <Transaction>2014/10/05 21:02:18.000.531,C:\Users\daniel\Desktop\CadastroMySQL\Unit1.dfm=C:\Users\daniel\Desktop\CadastroMySQL\uDMRelatorio.dfm</Transaction>
+    <Transaction>2014/10/05 21:02:18.000.531,C:\Users\daniel\Desktop\CadastroMySQL\Unit1.pas=C:\Users\daniel\Desktop\CadastroMySQL\uDMRelatorio.pas</Transaction>
+    <Transaction>2014/10/07 23:15:43.000.340,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/10/07 23:28:27.000.586,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uLogin.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.dfm</Transaction>
+    <Transaction>2014/10/07 23:28:27.000.586,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uLogin.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/10/08 23:39:17.000.934,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/10/08 23:47:40.000.093,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uUsuarios.pas</Transaction>
+    <Transaction>2014/10/08 23:47:40.000.093,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uUsuarios.dfm</Transaction>
+    <Transaction>2014/10/10 00:12:44.000.804,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/10/10 00:32:09.000.749,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uCadastroSenha.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.dfm</Transaction>
+    <Transaction>2014/10/10 00:32:09.000.749,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uCadastroSenha.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/10/12 01:11:15.000.597,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/10/12 01:19:25.000.018,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uLocalizarFornecedor.dfm</Transaction>
+    <Transaction>2014/10/12 01:19:25.000.018,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uLocalizarFornecedor.pas</Transaction>
+    <Transaction>2014/10/15 00:32:40.000.171,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/10/15 00:33:59.000.107,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uCarregamentoDados.pas</Transaction>
+    <Transaction>2014/10/15 00:33:59.000.107,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uCarregamentoDados.dfm</Transaction>
+    <Transaction>2014/10/30 00:21:07.000.544,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/10/30 00:22:01.000.751,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uListForn.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.dfm</Transaction>
+    <Transaction>2014/10/30 00:22:01.000.750,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uListForn.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/11/15 00:04:54.000.471,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/11/15 00:11:29.000.082,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uTabMunicipios.pas</Transaction>
+    <Transaction>2014/11/15 00:11:29.000.082,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uTabMunicipios.dfm</Transaction>
+    <Transaction>2014/12/20 23:03:32.000.468,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2014/12/20 23:19:03.000.183,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uTabUF.dfm</Transaction>
+    <Transaction>2014/12/20 23:19:03.000.183,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uTabUF.pas</Transaction>
+    <Transaction>2015/01/17 03:10:22.000.834,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2015/01/17 03:15:06.000.869,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uCfgEnvEmail.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.dfm</Transaction>
+    <Transaction>2015/01/17 03:15:06.000.869,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uCfgEnvEmail.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2015/01/20 03:52:22.000.997,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas</Transaction>
+    <Transaction>2015/01/20 03:56:25.000.512,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Unit1.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uValidaCNPJCPF.pas</Transaction>
+    <Transaction>2015/01/26 23:52:00.000.421,=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\fornecedor.pas</Transaction>
+    <Transaction>2015/02/12 00:47:07.000.497,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uCadPart.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uFornecedores.dfm</Transaction>
+    <Transaction>2015/02/12 00:47:07.000.497,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uCadPart.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uFornecedores.pas</Transaction>
+    <Transaction>2015/02/15 01:16:47.000.468,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uLocPart.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uLocalizarFornecedor.dfm</Transaction>
+    <Transaction>2015/02/15 01:16:47.000.468,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uLocPart.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uLocalizarFornecedor.pas</Transaction>
+    <Transaction>2015/02/15 01:16:56.000.508,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uListPart.pas=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uListForn.pas</Transaction>
+    <Transaction>2015/02/15 01:16:56.000.508,C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uListPart.dfm=C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\uListForn.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

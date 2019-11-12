@@ -1,0 +1,111 @@
+unit uCfgEnvEmail;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls,
+  Vcl.Mask, Vcl.DBCtrls, Data.DB;
+
+type
+  TuFrmCfgEnvEmail = class(TForm)
+    ToolBar1: TToolBar;
+    tbtnGravarCfgEnvEmail: TToolButton;
+    tbtnSairCfgEnvEmail: TToolButton;
+    gbTipoEnvEmail: TGroupBox;
+    rbTipoSmtp: TRadioButton;
+    rbTipoMapi: TRadioButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    edtServSMTP: TDBEdit;
+    edtPortaServSMTP: TDBEdit;
+    edtUsuarioServSMTP: TDBEdit;
+    edtSenhaServSMTP: TDBEdit;
+    dsCfgEnvEmail: TDataSource;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure tbtnSairCfgEnvEmailClick(Sender: TObject);
+    procedure tbtnGravarCfgEnvEmailClick(Sender: TObject);
+    procedure edtPortaServSMTPKeyPress(Sender: TObject; var Key: Char);
+    procedure edtServSMTPChange(Sender: TObject);
+    procedure edtPortaServSMTPChange(Sender: TObject);
+    procedure edtUsuarioServSMTPChange(Sender: TObject);
+    procedure edtSenhaServSMTPChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uFrmCfgEnvEmail: TuFrmCfgEnvEmail;
+
+implementation
+
+{$R *.dfm}
+
+uses uDMBanco;
+
+procedure TuFrmCfgEnvEmail.edtPortaServSMTPChange(Sender: TObject);
+begin
+  DMBanco.cdsCfgEnvEmail.Edit;
+end;
+
+procedure TuFrmCfgEnvEmail.edtPortaServSMTPKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  If Not( key in['0'..'9',#08] )
+    Then key:=#0;
+end;
+
+procedure TuFrmCfgEnvEmail.edtSenhaServSMTPChange(Sender: TObject);
+begin
+  DMBanco.cdsCfgEnvEmail.Edit;
+end;
+
+procedure TuFrmCfgEnvEmail.edtServSMTPChange(Sender: TObject);
+begin
+  DMBanco.cdsCfgEnvEmail.Edit;
+end;
+
+procedure TuFrmCfgEnvEmail.edtUsuarioServSMTPChange(Sender: TObject);
+begin
+  DMBanco.cdsCfgEnvEmail.Edit;
+end;
+
+procedure TuFrmCfgEnvEmail.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:= caFree;
+  uFrmCfgEnvEmail:= nil;
+end;
+
+procedure TuFrmCfgEnvEmail.tbtnGravarCfgEnvEmailClick(Sender: TObject);
+begin
+  If rbTipoSmtp.Checked
+    Then begin
+      If (edtServSMTP.Text = '')
+        Then MessageDlg('O campo servidor é obrigatório!', mtError, [mbOK],0)
+      Else If (edtPortaServSMTP.Text = '')
+        Then MessageDlg('O campo Porta é obrigatório!', mtError, [mbOK], 0)
+      Else If (edtUsuarioServSMTP.Text = '')
+        Then MessageDlg('O campo usuário é obrigatório!', mtError, [mbOK], 0)
+      Else If (edtSenhaServSMTP.Text = '')
+        Then MessageDlg('O campo senha é obrigatório!', mtError, [mbOK], 0)
+      Else begin
+        DMBanco.cdsCfgEnvEmail.Post;
+        Close;
+      end;
+  end;
+end;
+
+procedure TuFrmCfgEnvEmail.tbtnSairCfgEnvEmailClick(Sender: TObject);
+begin
+  If (DMBanco.cdsCfgEnvEmail.State in [dsInsert, dsEdit])
+    Then begin
+      DMBanco.cdsCfgEnvEmail.CancelUpdates;
+      Close;
+  end;
+end;
+
+end.

@@ -1,0 +1,99 @@
+object uFrmListForn: TuFrmListForn
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = 'Listagem de Fornecedores'
+  ClientHeight = 211
+  ClientWidth = 279
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnKeyDown = FormKeyDown
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 40
+    Top = 56
+    Width = 67
+    Height = 13
+    Caption = 'C'#243'digo Inicial:'
+  end
+  object Label2: TLabel
+    Left = 40
+    Top = 112
+    Width = 62
+    Height = 13
+    Caption = 'C'#243'digo Final:'
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Top = 0
+    Width = 279
+    Height = 29
+    ButtonHeight = 21
+    ButtonWidth = 51
+    Caption = 'ToolBar1'
+    ParentShowHint = False
+    ShowCaptions = True
+    ShowHint = True
+    TabOrder = 0
+    object tbtnImprimirrListForn: TToolButton
+      Left = 0
+      Top = 0
+      Hint = 'Imprimir'
+      Caption = 'Imprimir'
+      ImageIndex = 0
+      OnClick = tbtnImprimirrListFornClick
+    end
+    object tbtnVisualizarListForn: TToolButton
+      Left = 51
+      Top = 0
+      Hint = 'Visualizar'
+      Caption = 'Visualizar'
+      ImageIndex = 1
+      OnClick = tbtnVisualizarListFornClick
+    end
+    object tbtnSairListForn: TToolButton
+      Left = 102
+      Top = 0
+      Hint = 'Sair'
+      Caption = 'Sair'
+      ImageIndex = 2
+      OnClick = tbtnSairListFornClick
+    end
+  end
+  object cbListFornCodInicial: TDBComboBox
+    Left = 40
+    Top = 75
+    Width = 145
+    Height = 21
+    DataField = 'codigo'
+    DataSource = uFrmFornecedores.dsFornecedor
+    TabOrder = 1
+  end
+  object cbListFornCodFinal: TDBComboBox
+    Left = 40
+    Top = 131
+    Width = 145
+    Height = 21
+    DataField = 'codigo'
+    DataSource = uFrmFornecedores.dsFornecedor
+    TabOrder = 2
+  end
+  object QListForn: TSQLQuery
+    DataSource = uFrmFornecedores.dsFornecedor
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = DMBanco.ConnBanco
+    Left = 232
+    Top = 40
+  end
+  object dlgImprimirListForn: TPrintDialog
+    Left = 232
+    Top = 96
+  end
+end

@@ -1,0 +1,106 @@
+unit uListForn;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ComCtrls,
+  Vcl.ToolWin, Data.FMTBcd, Data.DB, Data.SqlExpr, Vcl.Mask;
+
+type
+  TuFrmListForn = class(TForm)
+    ToolBar1: TToolBar;
+    tbtnImprimirrListForn: TToolButton;
+    tbtnVisualizarListForn: TToolButton;
+    tbtnSairListForn: TToolButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    QListForn: TSQLQuery;
+    dlgImprimirListForn: TPrintDialog;
+    edtListFornCodInicial: TDBEdit;
+    edtListFornCodFinal: TDBEdit;
+    lcbListFornCodFinal: TDBLookupComboBox;
+    lcbListFornCodInicial: TDBLookupComboBox;
+    procedure tbtnVisualizarListFornClick(Sender: TObject);
+    procedure tbtnSairListFornClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure tbtnImprimirrListFornClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uFrmListForn: TuFrmListForn;
+
+implementation
+
+{$R *.dfm}
+
+uses uPrincipal, uFornecedores, uCarregamentoDados, uDMBanco, uDMRelatorio;
+
+procedure TuFrmListForn.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:= caFree;
+  uFrmListForn:= nil;
+end;
+
+procedure TuFrmListForn.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_Escape) then
+  begin
+    Close;
+  end;
+end;
+
+procedure TuFrmListForn.tbtnImprimirrListFornClick(Sender: TObject);
+begin
+  if (dlgImprimirListForn.Execute) then
+  begin
+    try
+      QListForn.Active:= false;
+      QListForn.SQL.Clear;
+      QListForn.SQL.Add('SELECT codigo, razao, telefone FROM fornecedores WHERE codigo >= '+lcbListFornCodInicial.Text+' AND codigo <= '+lcbListFornCodFinal.Text+' ORDER BY codigo;');
+      QListForn.Active:= true;
+      DMRelatorio.frpFornecedor.LoadFromFile('C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Relatorio\ListagemFornecedores.fr3');
+      uFrmCarregamentoDados:= TuFrmCarregamentoDados.Create(Self);
+      uFrmCarregamentoDados.ShowModal;
+      DMRelatorio.frpFornecedor.Print;
+    except
+      on e: exception do
+      MessageDlg(E.Message, mtWarning, [mbOK], 0);
+    end;
+  end;
+end;
+
+procedure TuFrmListForn.tbtnSairListFornClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TuFrmListForn.tbtnVisualizarListFornClick(Sender: TObject);
+begin
+  if (lcbListFornCodFinal.Text > lcbListFornCodInicial.Text) then
+    MessageDlg('O código inicial não pode ser menor que o código final.', mtWarning, [mbOK], 0)
+  else
+  begin
+    try
+      {QListForn.Active:= false;
+      QListForn.SQL.Clear;
+      QListForn.SQL.Add('SELECT codigo, razao, telefone FROM fornecedores WHERE codigo BETWEEN '+lcbListFornCodInicial.Text+' AND '+lcbListFornCodFinal.Text+' ORDER BY codigo;');
+      QListForn.Active:= true;}
+      DMRelatorio.frpFornecedor.LoadFromFile('C:\Users\daniel\Desktop\DANIEL\Delphi\Cadastro Empresa\Relatorio\RelFornec.fr3');
+      //uFrmCarregamentoDados:= TuFrmCarregamentoDados.Create(Self);
+      //uFrmCarregamentoDados.ShowModal;
+      DMRelatorio.frpFornecedor.ShowReport;
+    except
+      on e: exception do
+      MessageDlg(E.Message, mtError, [mbOK], 0);
+    end;
+  end;
+end;
+
+end.

@@ -1,0 +1,133 @@
+object uFrmCadastroSenha: TuFrmCadastroSenha
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = 'Cadastro de Senha'
+  ClientHeight = 236
+  ClientWidth = 253
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poScreenCenter
+  Visible = True
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 49
+    Top = 50
+    Width = 84
+    Height = 16
+    Caption = 'Senha Atual:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 49
+    Top = 112
+    Width = 81
+    Height = 16
+    Caption = 'Nova Senha:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 49
+    Top = 168
+    Width = 112
+    Height = 16
+    Caption = 'Confirmar Senha:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Top = 0
+    Width = 253
+    Height = 29
+    ButtonHeight = 21
+    ButtonWidth = 49
+    Caption = 'tbCadastroSenha'
+    ParentShowHint = False
+    ShowCaptions = True
+    ShowHint = True
+    TabOrder = 0
+    object tbtnGravarCadastroSenha: TToolButton
+      Left = 0
+      Top = 0
+      Cursor = crHandPoint
+      Hint = 'Gravar'
+      Caption = 'Gravar'
+      ImageIndex = 0
+      OnClick = tbtnGravarCadastroSenhaClick
+    end
+    object tbtnCancelarCadastroSenha: TToolButton
+      Left = 49
+      Top = 0
+      Cursor = crHandPoint
+      Hint = 'Cancelar'
+      Caption = 'Cancelar'
+      ImageIndex = 1
+      OnClick = tbtnCancelarCadastroSenhaClick
+    end
+  end
+  object edtSenhaAtual: TEdit
+    Left = 49
+    Top = 72
+    Width = 144
+    Height = 21
+    Color = clBtnFace
+    Enabled = False
+    TabOrder = 1
+    OnKeyPress = edtSenhaAtualKeyPress
+  end
+  object edtNovaSenha: TEdit
+    Left = 48
+    Top = 128
+    Width = 145
+    Height = 21
+    PasswordChar = '*'
+    TabOrder = 2
+    OnKeyPress = edtNovaSenhaKeyPress
+  end
+  object edtConfirmarSenha: TEdit
+    Left = 48
+    Top = 184
+    Width = 145
+    Height = 21
+    PasswordChar = '*'
+    TabOrder = 3
+    OnKeyPress = edtConfirmarSenhaKeyPress
+  end
+  object QCadastraUsuario: TSQLQuery
+    DataSource = dsCadastroSenha
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = DMBanco.ConnBanco
+    Left = 184
+    Top = 104
+  end
+  object dsCadastroSenha: TDataSource
+    DataSet = DMBanco.cdsUsuario
+    Left = 184
+    Top = 168
+  end
+end

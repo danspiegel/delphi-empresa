@@ -1,0 +1,118 @@
+unit uCadastroSenha;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ToolWin,
+  Data.FMTBcd, Data.DB, Data.SqlExpr, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TuFrmCadastroSenha = class(TForm)
+    ToolBar1: TToolBar;
+    tbtnGravarCadastroSenha: TToolButton;
+    tbtnCancelarCadastroSenha: TToolButton;
+    Label2: TLabel;
+    Label3: TLabel;
+    QCadastraUsuario: TSQLQuery;
+    dsCadastroSenha: TDataSource;
+    edtNovaSenha: TEdit;
+    edtConfirmarSenha: TEdit;
+    procedure tbtnCancelarCadastroSenhaClick(Sender: TObject);
+    procedure tbtnGravarCadastroSenhaClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edtSenhaAtualKeyPress(Sender: TObject; var Key: Char);
+    procedure edtNovaSenhaKeyPress(Sender: TObject; var Key: Char);
+    procedure edtConfirmarSenhaKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    idusuario, nomeusuario: string;
+    verificadorsenha: integer;
+  end;
+
+var
+  uFrmCadastroSenha: TuFrmCadastroSenha;
+
+implementation
+
+{$R *.dfm}
+
+uses uUsuarios, uDMBanco, uPrincipal;
+
+procedure TuFrmCadastroSenha.edtConfirmarSenhaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not( key in['0'..'9',#08] ) then
+    key:=#0;
+end;
+
+procedure TuFrmCadastroSenha.edtNovaSenhaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not( key in['0'..'9',#08] ) then
+    key:=#0;
+end;
+
+procedure TuFrmCadastroSenha.edtSenhaAtualKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not( key in['0'..'9',#08] ) then
+    key:=#0;
+end;
+
+procedure TuFrmCadastroSenha.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:= caFree;
+  uFrmCadastroSenha:= nil;
+end;
+
+procedure TuFrmCadastroSenha.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_Escape) then
+  begin
+    FreeAndNil(uFrmCadastroSenha);
+  end;
+end;
+
+procedure TuFrmCadastroSenha.tbtnCancelarCadastroSenhaClick(Sender: TObject);
+begin
+  FreeAndNil(uFrmCadastroSenha);
+end;
+
+procedure TuFrmCadastroSenha.tbtnGravarCadastroSenhaClick(Sender: TObject);
+begin
+  if (edtNovaSenha.Text = '') then
+    MessageDlg('Campo nova senha é obrigatório!', mtWarning, [mbOK], 0)
+  else if (edtConfirmarSenha.Text = '') then
+    MessageDlg('Campo confirmar senha é obrigatório!', mtWarning, [mbOK], 0)
+  else if (edtNovaSenha.Text = edtConfirmarSenha.Text) then
+  begin
+    try
+      With QCadastraUsuario
+        Do begin
+          SQL.Clear;
+          SQL.Add('UPDATE usuario SET senha='+edtConfirmarSenha.Text+' WHERE idusuari='+uFrmPrincipal.stbStatus.Panels[0].Text+'');
+          ExecSQL;
+      end;
+      DMBanco.cdsUsuario.ApplyUpdates(0);
+      MessageDlg('Senha alterada com sucesso!', mtInformation, [mbOK], 0);
+      Close;
+    except
+      on e: exception do
+      MessageDlg(E.Message, mtError, [mbOK], 0);
+    end;
+  end
+  else
+  begin
+    MessageDlg('As senhas não correspondem.', mtInformation, [mbOK], 0);
+    edtConfirmarSenha.SetFocus;
+  end;
+
+end;
+
+end.

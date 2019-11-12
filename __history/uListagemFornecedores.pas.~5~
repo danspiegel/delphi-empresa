@@ -1,0 +1,60 @@
+unit uListagemFornecedores;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin;
+
+type
+  TuFrmListagemFornecedores = class(TForm)
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ImageList1: TImageList;
+    procedure ToolButton3Click(Sender: TObject);
+    procedure ToolButton1Click(Sender: TObject);
+    procedure ToolButton2Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uFrmListagemFornecedores: TuFrmListagemFornecedores;
+
+implementation
+
+{$R *.dfm}
+
+uses uDMBanco;
+
+procedure TuFrmListagemFornecedores.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_Escape) then
+    Close;
+end;
+
+procedure TuFrmListagemFornecedores.ToolButton1Click(Sender: TObject);
+begin
+  if (DMBanco.cdsFornecedor.IsEmpty) then
+    ShowMessage('Não existem dados a serem impressos!');
+
+end;
+
+procedure TuFrmListagemFornecedores.ToolButton2Click(Sender: TObject);
+begin
+  if (DMBanco.cdsFornecedor.IsEmpty) then
+    ShowMessage('Não existem dados a serem visualizados!');
+end;
+
+procedure TuFrmListagemFornecedores.ToolButton3Click(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

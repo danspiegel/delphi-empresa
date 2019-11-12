@@ -1,0 +1,133 @@
+object DMBanco: TDMBanco
+  OldCreateOrder = False
+  Height = 305
+  Width = 439
+  object ConnBanco: TSQLConnection
+    ConnectionName = 'empresa'
+    DriverName = 'Odbc'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverName=Odbc'
+      'DriverUnit=Data.DBXOdbc'
+      'DriverPackageLoader=TDBXOdbcDriverLoader,DBXOdbcDriver170.bpl'
+      
+        'MetaDataPackageLoader=TDBXOdbcMetaDataCommandFactory,DbxOdbcDriv' +
+        'er170.bpl'
+      'IsolationLevel=ReadCommitted'
+      'RowSetSize=20'
+      
+        'DriverAssemblyLoader=Borland.Data.TDBXOdbcDriverLoader,Borland.D' +
+        'ata.DbxOdbcDriver,Version=17.0.0.0,Culture=neutral,PublicKeyToke' +
+        'n=91d62ebb5b0d1b1b'
+      
+        'MetaDataAssemblyLoader=Borland.Data.TDBXOdbcMetaDataCommandFacto' +
+        'ry,Borland.Data.DbxOdbcDriver,Version=17.0.0.0,Culture=neutral,P' +
+        'ublicKeyToken=91d62ebb5b0d1b1b'
+      'Database=PostgreSQL35W'
+      'User_Name=postgres'
+      'Password=postgres')
+    Connected = True
+    Left = 40
+    Top = 16
+  end
+  object cdsUsuario: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspUsuario'
+    Left = 40
+    Top = 72
+    object cdsUsuarioidusuario: TWideStringField
+      FieldName = 'idusuario'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 45
+    end
+    object cdsUsuarionomeusuario: TWideStringField
+      FieldName = 'nomeusuario'
+      Required = True
+      Size = 45
+    end
+    object cdsUsuariosenha: TWideStringField
+      FieldName = 'senha'
+      Required = True
+      Size = 12
+    end
+  end
+  object sdsUsuario: TSQLDataSet
+    SchemaName = 'postgres'
+    Active = True
+    CommandText = 'SELECT * FROM USUARIO'#13#10'ORDER BY IDUSUARIO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = ConnBanco
+    Left = 120
+    Top = 72
+  end
+  object dspUsuario: TDataSetProvider
+    DataSet = sdsUsuario
+    Left = 200
+    Top = 72
+  end
+  object sdsFornecedor: TSQLDataSet
+    SchemaName = 'postgres'
+    Active = True
+    CommandText = 'SELECT * FROM FORNECEDORES'#13#10'ORDER BY CODIGO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = ConnBanco
+    Left = 120
+    Top = 16
+  end
+  object cdsFornecedor: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspFornecedor'
+    Left = 200
+    Top = 16
+  end
+  object dspFornecedor: TDataSetProvider
+    DataSet = sdsFornecedor
+    Left = 280
+    Top = 16
+  end
+  object sdsMunicipios: TSQLDataSet
+    SchemaName = 'postgres'
+    Active = True
+    CommandText = 'SELECT * FROM MUNICIPIOS'#13#10'ORDER BY CODIGOIBGE'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = ConnBanco
+    Left = 288
+    Top = 72
+  end
+  object cdsMunicipios: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspMunicipios'
+    Left = 40
+    Top = 136
+    object cdsMunicipioscodigoibge: TIntegerField
+      FieldName = 'codigoibge'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsMunicipiosnomemunicipio: TWideStringField
+      FieldName = 'nomemunicipio'
+      Required = True
+      Size = 45
+    end
+    object cdsMunicipiosestado: TWideStringField
+      FieldName = 'estado'
+      Required = True
+      Size = 45
+    end
+  end
+  object dspMunicipios: TDataSetProvider
+    DataSet = sdsMunicipios
+    Left = 128
+    Top = 136
+  end
+end
